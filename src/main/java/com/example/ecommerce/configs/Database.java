@@ -48,6 +48,13 @@ public class Database {
         return count > 0;
     }
 
+    public boolean findOneInTable(String table, String column, Object[] params) {
+        String query = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", table, column);
+        int count = jdbc.queryForObject(query, Integer.class, params);
+
+        return count > 0;
+    }
+
     @SuppressWarnings("deprecation")
     public <T> T fetchByIdInTable(String table, Integer id, RowMapper<T> mapper) {
         String query = String.format("SELECT * FROM %s WHERE id = ?", table);

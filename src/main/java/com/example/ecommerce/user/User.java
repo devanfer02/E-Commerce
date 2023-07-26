@@ -2,7 +2,6 @@ package com.example.ecommerce.user;
 
 import com.example.ecommerce.configs.Type;
 
-
 public class User {
     private Integer id;
     private String first_name;

@@ -1,6 +1,7 @@
 package com.example.ecommerce.user;
 
 import com.example.ecommerce.configs.Database;
+import com.example.ecommerce.configs.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,5 +61,26 @@ public class UserService {
 
     public int removeUser(Integer id) {
         return db.remove("users", new Object[]{id});
+    }
+
+    public Status verify(User user) {
+        boolean emailExist = db.findOneInTable("users", "email", new Object[]{user.getEmail()});
+
+        if (emailExist) {
+            return Status.EMAIL_EXIST;
+        }
+
+        boolean firstNameIsNull = user.getFirst_name() == null;
+        boolean lastNameIsNull  = user.getLast_name()  == null;
+        boolean emailIsNull     = user.getEmail()      == null;
+        boolean phoneIsNull     = user.getType()       == null;
+
+        boolean requestIsNull = firstNameIsNull || lastNameIsNull || emailIsNull | phoneIsNull;
+
+        if (requestIsNull) {
+            return Status.VALUES_STILL_NULL;
+        }
+
+        return Status.OK;
     }
 }

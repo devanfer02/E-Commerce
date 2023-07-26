@@ -14,7 +14,7 @@ public class ProductRowMapper implements RowMapper<Product> {
         product.setSeller(res.getInt("seller_id"));
         product.setTitle(res.getString("title"));
         product.setDescription(res.getString("description"));
-        product.setPrice(res.getString("price"));
+        product.setPrice(res.getLong("price"));
         product.setStock(res.getInt("price"));
 
         return  product;

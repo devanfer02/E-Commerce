@@ -5,7 +5,7 @@ CREATE TABLE products (
     seller_id INTEGER,
     title TEXT,
     description TEXT,
-    price TEXT,
+    price INTEGER,
     stock INTEGER,
     FOREIGN KEY (seller_id) REFERENCES Users(id) ON DELETE CASCADE
 );
