@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path= "api/users")
+@RequestMapping(path="api/users")
 public class UserController {
     private final UserService userService;
 
@@ -31,12 +31,12 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getUser(@PathVariable Integer id) {
+    public ResponseEntity<Object> getUserById(@PathVariable Integer id) {
         try {
             User data = userService.getUserById(id);
+
             return Response.generateResponse(HttpStatus.OK, "successfully fetch data", data);
         } catch (EmptyResultDataAccessException exception) {
-            System.out.println(exception.getMessage());
             return Response.generateResponse(HttpStatus.NOT_FOUND, "data not found", null);
         }
     }
@@ -50,7 +50,7 @@ public class UserController {
                 return Response.generateResponse(HttpStatus.BAD_REQUEST, "failed to add data", null);
             }
 
-            return Response.generateResponse(HttpStatus.OK, "successfully add data", null);
+            return Response.generateResponse(HttpStatus.OK, "successfully add data", user);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return Response.generateResponse(HttpStatus.INTERNAL_SERVER_ERROR, "internal server error", null);
@@ -68,7 +68,6 @@ public class UserController {
 
             return Response.generateResponse(HttpStatus.OK, "successfully update data", null);
         } catch (EmptyResultDataAccessException exception) {
-            System.out.println(exception.getMessage());
             return Response.generateResponse(HttpStatus.NOT_FOUND, "data not found", null);
         }
     }
@@ -79,13 +78,13 @@ public class UserController {
             int rowsAffected = userService.removeUser(id);
 
             if (rowsAffected < 1) {
-                return Response.generateResponse(HttpStatus.BAD_REQUEST, "failed to delete data", null);
+                return Response.generateResponse(HttpStatus.NOT_FOUND, "failed to delete data", null);
             }
 
             return Response.generateResponse(HttpStatus.OK, "successfully delete data", null);
-        } catch (EmptyResultDataAccessException exception) {
+        } catch (Exception exception) {
             System.out.println(exception.getMessage());
-            return Response.generateResponse(HttpStatus.NOT_FOUND, "data not found", null);
+            return Response.generateResponse(HttpStatus.INTERNAL_SERVER_ERROR, "internal server error", null);
         }
     }
 }

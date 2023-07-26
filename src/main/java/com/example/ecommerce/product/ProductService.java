@@ -27,4 +27,45 @@ public class ProductService {
         return db.fetchByOne(query, new Object[]{id}, new ProductRowMapper());
     }
 
+    public int addNewProduct(Product product) {
+        boolean exist = db.findOneInTable("users", new Object[]{product.getSeller()});
+
+        if(!exist) {
+            return -1;
+        }
+
+        String query = "INSERT INTO products (seller, title, description, price stock) VALUES (?, ?, ?, ?, ?)";
+        Object[] params = new Object[]{
+                product.getSeller(),
+                product.getTitle(),
+                product.getDescription(),
+                product.getPrice(),
+                product.getStock()
+        };
+        int rowsAffected = db.insert(query, params);
+
+        return rowsAffected;
+    }
+
+    public int updateProduct(Integer id, Product product){
+        String query = "UPDATE products SET seller=?, title=?, description=?, price=?, stock=? WHERE id=?";
+        Product productInDb = db.fetchByIdInTable("products", id, new ProductRowMapper());
+
+        productInDb.update(product);
+
+        Object[] params = new Object[]{
+                productInDb.getSeller(),
+                productInDb.getTitle(),
+                productInDb.getDescription(),
+                productInDb.getPrice(),
+                productInDb.getStock(),
+                id
+        };
+        int rowsAffected = db.insert(query, params);
+        return rowsAffected;
+    }
+
+    public int removeProduct(Integer id) {
+        return db.remove("products", new Object[]{id});
+    }
 }

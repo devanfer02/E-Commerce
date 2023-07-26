@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +27,70 @@ public class ProductController {
         } catch (EmptyResultDataAccessException exception ) {
             System.out.println(exception.getMessage());
             return Response.generateResponse(HttpStatus.NOT_FOUND, "data not found", null);
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getProductById(@PathVariable Integer id) {
+        try {
+            Product data = productService.getProductById(id);
+
+            return Response.generateResponse(HttpStatus.OK, "successfully fetch data", data);
+        } catch (EmptyResultDataAccessException exception) {
+            return Response.generateResponse(HttpStatus.NOT_FOUND, "data not found", null);
+        }
+    }
+
+    @PostMapping("/{userId}")
+    public ResponseEntity<Object> postProduct(@RequestBody Product product, @PathVariable Integer userId) {
+        product.setSeller(userId);
+        try {
+            int rowsAffected = productService.addNewProduct(product);
+
+            if(rowsAffected == -1) {
+                return Response.generateResponse(HttpStatus.NOT_FOUND, "user not found", null);
+            }
+
+            if(rowsAffected == 0) {
+                return Response.generateResponse(HttpStatus.BAD_REQUEST, "failed to add data", null);
+            }
+
+            return Response.generateResponse(HttpStatus.OK, "successfully add new data", null);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return Response.generateResponse(HttpStatus.INTERNAL_SERVER_ERROR, "internal server error", null);
+        }
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Object> patchProduct(@PathVariable Integer id, @RequestBody Product product) {
+        try {
+            int rowsAffected = productService.updateProduct(id, product);
+
+            if(rowsAffected < 1) {
+                return Response.generateResponse(HttpStatus.BAD_REQUEST, "failed to update data", null);
+            }
+
+            return Response.generateResponse(HttpStatus.OK, "successfully update data", null);
+
+        } catch (EmptyResultDataAccessException exception) {
+            return Response.generateResponse(HttpStatus.NOT_FOUND, "data not found", null);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteProduct(@PathVariable Integer id) {
+        try {
+            int rowsAffected = productService.removeProduct(id);
+
+            if(rowsAffected < 1) {
+                return Response.generateResponse(HttpStatus.NOT_FOUND, "failed to delete data", null);
+            }
+
+            return Response.generateResponse(HttpStatus.OK, "successfully delete data", null);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return Response.generateResponse(HttpStatus.INTERNAL_SERVER_ERROR, "internal server error", null);
         }
     }
 }

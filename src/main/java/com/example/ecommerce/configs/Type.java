@@ -9,14 +9,22 @@ public enum Type {
     }
 
     public String toString() {
-        switch (this) {
-            case BUYER ->  {
-                return "buyer";
+        try {
+            switch (this) {
+                case BUYER ->  {
+                    return "buyer";
+                }
+                case SELLER -> {
+                    return "seller";
+                }
+
             }
-            case SELLER -> {
-                return "seller";
-            }
+            throw new IllegalArgumentException("Unexpected value");
+
+        } catch ( IllegalArgumentException exception ){
+            System.out.println(exception.getMessage());
         }
-        return "unknown";
+
+        return "";
     }
 }

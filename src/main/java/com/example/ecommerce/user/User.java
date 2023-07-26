@@ -39,6 +39,24 @@ public class User {
         this.type = type.equals("buyer") ? Type.BUYER : Type.SELLER;
     }
 
+    public void update(User newData) {
+        if(newData.first_name != null) {
+            this.first_name = newData.first_name;
+        }
+        if(newData.last_name != null) {
+            this.last_name = newData.last_name;
+        }
+        if(newData.email != null) {
+            this.email = newData.email;
+        }
+        if(newData.phone_number != null) {
+            this.phone_number = newData.phone_number;
+        }
+        if(newData.type != null) {
+            this.type = newData.type;
+        }
+    }
+
     public Integer getId() {
         return id;
     }

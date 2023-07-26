@@ -1,9 +1,11 @@
-CREATE TABLE "products" (
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE products (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     seller_id INTEGER,
-    FOREIGN KEY (seller_id) REFERENCES Users(id),
     title TEXT,
     description TEXT,
     price TEXT,
-    stock INTEGER
+    stock INTEGER,
+    FOREIGN KEY (seller_id) REFERENCES Users(id) ON DELETE CASCADE
 );

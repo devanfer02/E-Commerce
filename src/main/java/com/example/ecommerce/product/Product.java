@@ -28,6 +28,24 @@ public class Product {
         this.stock = stock;
     }
 
+    public void update(Product newProduct) {
+        if(newProduct.seller != null) {
+            this.seller = newProduct.seller;
+        }
+        if(newProduct.title != null) {
+            this.title = newProduct.title;
+        }
+        if(newProduct.description != null) {
+            this.description = newProduct.description;
+        }
+        if(newProduct.price != null) {
+            this.price = newProduct.price;
+        }
+        if(newProduct.stock != null) {
+            this.stock = newProduct.stock;
+        }
+    }
+
     public Integer getId() {
         return id;
     }

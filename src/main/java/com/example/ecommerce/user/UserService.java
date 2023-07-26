@@ -43,19 +43,22 @@ public class UserService {
 
     public int updateUser(Integer id, User user) {
         String query = "UPDATE users SET first_name=?, last_name=?, email=?, phone_number=?, type=? WHERE id=?";
+        User userInDb = db.fetchByIdInTable("users", id, new UserRowMapper());
+
+        userInDb.update(user);
+
         Object[] params = new Object[] {
-            user.getFirst_name(),
-            user.getLast_name(),
-            user.getEmail(),
-            user.getPhone_number(),
-            user.getType().toString(),
+            userInDb.getFirst_name(),
+            userInDb.getLast_name(),
+            userInDb.getEmail(),
+            userInDb.getPhone_number(),
+            userInDb.getType(),
             id
         };
         return db.insert(query,params);
     }
 
     public int removeUser(Integer id) {
-        String query = "DELETE FROM users WHERE id=?";
-        return db.insert(query, new Object[]{ id });
+        return db.remove("users", new Object[]{id});
     }
 }
