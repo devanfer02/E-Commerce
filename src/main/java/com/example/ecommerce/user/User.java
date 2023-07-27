@@ -30,7 +30,7 @@ public class User {
         this.type = type;
     }
 
-    public User(String first_name, String last_name, String email, String phone_number) {
+    public User(String first_name, String last_name, String email, String phone_number, String type) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;

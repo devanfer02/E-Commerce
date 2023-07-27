@@ -61,10 +61,29 @@ public class Database {
         return jdbc.queryForObject(query, new Object[]{id}, mapper);
     }
 
+    @SuppressWarnings("deprecation")
+    public <T> T fetchByColumnInTable(String table, String column, Object columnValue, RowMapper<T> mapper) {
+        String query = String.format("SELECT * FROM %s WHERE %s = ?", table, column);
+        return jdbc.queryForObject(query, new Object[]{columnValue}, mapper);
+    }
+
     public int remove(String table, Object[] params) {
         String query = String.format("DELETE FROM %s WHERE id = ?",table);
         int rowAffected = jdbc.update(query, params);
 
         return rowAffected;
+    }
+
+    public int remove(String table, String column, Object[] params) {
+        String query = String.format("DELETE FROM %s WHERE %s = ?",table, column);
+        int rowAffected = jdbc.update(query, params);
+
+        return rowAffected;
+    }
+
+    public int getMaxIdFromTable(String table) {
+        String query = String.format("SELECT MAX(id) from %s", table);
+
+        return jdbc.queryForObject(query, Integer.class) + 1;
     }
 }

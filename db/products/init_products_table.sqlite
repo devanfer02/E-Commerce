@@ -1,7 +1,7 @@
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE products (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
     seller_id INTEGER,
     title TEXT,
     description TEXT,
@@ -9,3 +9,5 @@ CREATE TABLE products (
     stock INTEGER,
     FOREIGN KEY (seller_id) REFERENCES Users(id) ON DELETE CASCADE
 );
+
+CREATE INDEX product_id_idx ON products(id);

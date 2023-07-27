@@ -6,7 +6,8 @@ import org.springframework.http.ResponseEntity;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Response {
+public final class Response {
+    private Response(){}
     public static ResponseEntity<Object> generateResponse( HttpStatus status, String message, Object res) {
         Map<String, Object> json = new HashMap<>();
         json.put("status", status.value());

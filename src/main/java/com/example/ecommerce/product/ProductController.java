@@ -57,9 +57,8 @@ public class ProductController {
 
     @PostMapping("/{userId}")
     public ResponseEntity<Object> postProduct(@RequestBody Product product, @PathVariable Integer userId) {
-        product.setSeller(userId);
         try {
-            Status request = productService.verify(product);
+            Status request = productService.verify(product, userId);
 
             if (request == Status.NOT_FOUND) {
                 return Response.generateResponse(HttpStatus.NOT_FOUND, "seller not found", null);

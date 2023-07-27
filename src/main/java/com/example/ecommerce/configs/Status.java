@@ -5,7 +5,8 @@ public enum Status {
     EMAIL_EXIST(-1),
     VALUES_STILL_NULL(-2),
     NOT_FOUND(-3),
-    DIFF_TYPE(-4);
+    DIFF_TYPE(-4),
+    USER_EXIST(-5);
     
     private int value;
 

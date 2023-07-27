@@ -1,0 +1,11 @@
+CREATE TABLE "addresses" (
+    user_id INTEGER NOT NULL UNIQUE,
+    street TEXT NOT NULL,
+    city TEXT NOT NULL,
+    province TEXT NOT NULL,
+    postcode TEXT NOT NULL,
+    country TEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
+);
+
+CREATE INDEX address_user_idx ON addresses(user_id);

@@ -3,6 +3,7 @@ package com.example.ecommerce.product;
 import com.example.ecommerce.configs.Database;
 import com.example.ecommerce.configs.Status;
 import com.example.ecommerce.configs.Type;
+import com.example.ecommerce.configs.Utils;
 import com.example.ecommerce.user.User;
 import com.example.ecommerce.user.UserRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class ProductService {
     }
 
     public List<Product> getProducts(Long val, String type) {
-        String query = "";
+        String query;
         Object[] params = new Object[]{
                 val
         };
@@ -63,16 +64,15 @@ public class ProductService {
                 product.getPrice(),
                 product.getStock()
         };
-        int rowsAffected = db.insert(query, params);
 
-        return rowsAffected;
+        return db.insert(query, params);
     }
 
     public int updateProduct(Integer id, Product product){
         String query = "UPDATE products SET seller_id=?, title=?, description=?, price=?, stock=? WHERE id=?";
         Product productInDb = db.fetchByIdInTable("products", id, new ProductRowMapper());
 
-        productInDb.update(product);
+        Utils.updateObjectValues(productInDb, product);
 
         Object[] params = new Object[]{
                 productInDb.getSeller(),
@@ -82,39 +82,35 @@ public class ProductService {
                 productInDb.getStock(),
                 id
         };
-        int rowsAffected = db.insert(query, params);
-        return rowsAffected;
+
+        return db.insert(query, params);
     }
 
     public int removeProduct(Integer id) {
         return db.remove("products", new Object[]{id});
     }
 
-    public Status verify(Product product) {
-        boolean userExist = db.findOneInTable("users", new Object[]{product.getSeller()});
+    public Status verify(Product product, Integer userId) {
+        boolean userExist = db.findOneInTable("users", new Object[]{userId});
 
         if (!userExist) {
             return Status.NOT_FOUND;
         }
 
+        product.setSeller(userId);
         User user = db.fetchByIdInTable("users", product.getSeller(), new UserRowMapper());
 
         if(user.getType() != Type.SELLER) {
             return Status.DIFF_TYPE;
         }
 
-        boolean sellerIsNull = product.getSeller()      == null;
-        boolean titleIsNull  = product.getTitle()       == null;
-        boolean descIsNull   = product.getDescription() == null;
-        boolean priceIsNull  = product.getPrice()       == null;
-        boolean stockIsNull  = product.getStock()       == null;
-
-        boolean stillNull = sellerIsNull || titleIsNull || descIsNull || priceIsNull || stockIsNull;
+        boolean stillNull = Utils.nullChecker(product);
 
         if(stillNull) {
             return Status.VALUES_STILL_NULL;
         }
 
+        product.setId(db.getMaxIdFromTable("products"));
         return Status.OK;
     }
 

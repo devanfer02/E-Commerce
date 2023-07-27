@@ -121,7 +121,7 @@
     ```
     {
     "data": {
-        "id": null,
+        "id": 1,
         "first_name": "first",
         "last_name": "last",
         "email": "firstlast@gmail.com",
@@ -354,7 +354,7 @@
     ```
     {
     "data": {
-        "id": null,
+        "id": 1,
         "seller": 1,
         "title": "Backend for Beginner",
         "description": "Backend using js and mysql database",

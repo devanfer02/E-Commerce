@@ -2,6 +2,7 @@ package com.example.ecommerce.user;
 
 import com.example.ecommerce.configs.Database;
 import com.example.ecommerce.configs.Status;
+import com.example.ecommerce.configs.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,17 +71,13 @@ public class UserService {
             return Status.EMAIL_EXIST;
         }
 
-        boolean firstNameIsNull = user.getFirst_name() == null;
-        boolean lastNameIsNull  = user.getLast_name()  == null;
-        boolean emailIsNull     = user.getEmail()      == null;
-        boolean phoneIsNull     = user.getType()       == null;
+        boolean stillNull = Utils.nullChecker(user);
 
-        boolean requestIsNull = firstNameIsNull || lastNameIsNull || emailIsNull | phoneIsNull;
-
-        if (requestIsNull) {
+        if (stillNull) {
             return Status.VALUES_STILL_NULL;
         }
 
+        user.setId(db.getMaxIdFromTable("users"));
         return Status.OK;
     }
 }
