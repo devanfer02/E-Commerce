@@ -1,0 +1,10 @@
+CREATE TABLE orders (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    buyer_id INTEGER NOT NULL,
+    notes TEXT NOT NULL,
+    total INTEGER NOT NULL,
+    discount INTEGER NOT NULL,
+    is_paid BOOLEAN NOT NULL
+);
+
+CREATE INDEX order_id_idx ON orders (id);

@@ -1,0 +1,18 @@
+INSERT INTO "addresses" (user_id, street, city, province, postcode, country) VALUES
+(18, 'Jl. Merdeka No. 123', 'Jakarta Pusat', 'DKI Jakarta', '10110', 'Indonesia'),
+(19, 'Jl. Harmoni No. 456', 'Jakarta Barat', 'DKI Jakarta', '10210', 'Indonesia'),
+(20, 'Jl. Seruni No. 789', 'Jakarta Selatan', 'DKI Jakarta', '10310', 'Indonesia'),
+(21, 'Jl. Raya No. 555', 'Jakarta Timur', 'DKI Jakarta', '10410', 'Indonesia'),
+(22, 'Jl. Cendana No. 777', 'Jakarta Utara', 'DKI Jakarta', '10510', 'Indonesia'),
+(23, 'Jl. Anggrek No. 888', 'Bandung', 'Jawa Barat', '40111', 'Indonesia'),
+(24, 'Jl. Mawar No. 222', 'Surabaya', 'Jawa Timur', '60211', 'Indonesia'),
+(25, 'Jl. Melati No. 444', 'Semarang', 'Jawa Tengah', '50111', 'Indonesia'),
+(26, 'Jl. Dahlia No. 999', 'Medan', 'Sumatera Utara', '20211', 'Indonesia'),
+(27, 'Jl. Teratai No. 111', 'Palembang', 'Sumatera Selatan', '30111', 'Indonesia'),
+(28, 'Jl. Bougenville No. 333', 'Makassar', 'Sulawesi Selatan', '90111', 'Indonesia'),
+(29, 'Jl. Sakura No. 666', 'Denpasar', 'Bali', '80232', 'Indonesia'),
+(30, 'Jl. Anggrek No. 222', 'Yogyakarta', 'Yogyakarta', '55241', 'Indonesia'),
+(31, 'Jl. Cempaka No. 555', 'Bandar Lampung', 'Lampung', '35211', 'Indonesia'),
+(32, 'Jl. Kenanga No. 777', 'Padang', 'Sumatera Barat', '25115', 'Indonesia'),
+(33, 'Jl. Mawar No. 888', 'Manado', 'Sulawesi Utara', '95111', 'Indonesia'),
+(34, 'Jl. Melati No. 444', 'Pontianak', 'Kalimantan Barat', '78111', 'Indonesia');

@@ -382,7 +382,7 @@
     }
     ```
 5. ##### Update Product ```PATCH METHOD```
-   endpoint : ```api/products/{id}```
+   endpoint : ```api/products/{id}```   
    json request body : 
    ```
    {
@@ -411,6 +411,92 @@
 6. ##### Delete Product ```DELETE METHOD```
    endpoint : ```api/products/{id}```
    json response :
+   ```
+   {
+    "data": null,
+    "message": "successfully delete data",
+    "status": 200
+   }
+   ```
+   
+### Addresses
+1. ###### Get Address By User Id ```GET METHOD```
+   endpoint : ```api/addresses/{userId}```   
+   json response :
+   ```
+   {
+    "data": {
+        "user": 18,
+        "street": "jln ini malang",
+        "city": "Kota Malang",
+        "province": "Jawa Timur",
+        "postcode": "189213",
+        "country": "Indonesia"
+    },
+    "message": "successfully fetch data",
+    "status": 200
+   }
+   ```
+   
+2. ##### Add Address With User Id ```POST METHOD```
+   endpoint : ```api/addresses/{userId}```    
+   json request body : 
+   ```
+   {
+    "street":"jln ini malang",
+    "city": "Kota Malang",
+    "province": "Jawa Timur",
+    "postcode": "189213",
+    "country": "Indonesia"
+   }
+   ```
+   json response : 
+   ```
+   {
+    "data": {
+        "user": 18,
+        "street": "jln ini malang",
+        "city": "Kota Malang",
+        "province": "Jawa Timur",
+        "postcode": "189213",
+        "country": "Indonesia"
+    },
+    "message": "successfully add data",
+    "status": 201
+   }
+   ```
+   json response if user address already exist : 
+   ```
+   {
+    "data": null,
+    "message": "user address already exist",
+    "status": 409
+   }
+   ```
+   
+3. ##### Update Address ```PATCH METHOD```
+   endpoint : ```api/addresses/{userId}```   
+   json request body : 
+   ```
+   {
+    "street":"jln veteran",
+    "city": "Kota Malang",
+    "province": "Jawa Timur",
+    "postcode": "189213"
+   }
+   ```
+   json response : 
+   ```
+   {
+    "data": null
+    "message": "successfully update data",
+    "status": 200
+   }
+   ```
+   
+4. ###### Delete Address ```DELETE METHOD```
+   endpoint : ```api/addresses/{userId}```    
+   json response : 
    ```
    {
     "data": null,

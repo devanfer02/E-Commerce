@@ -34,13 +34,14 @@ public class AddressService {
     }
 
     public int updateAddress(Integer userId, Address address) {
-        String query = "UPDATE address SET street = ?, city = ?, province = ?, postcode = ?, country = ? WHERE user_id = ?";
+        String query = "UPDATE addresses SET street = ?, city = ?, province = ?, postcode = ?, country = ? WHERE user_id = ?";
         Address addressInDb = db.fetchByColumnInTable("addresses", "user_id", userId, new AddressRowMapper());
 
         Utils.updateObjectValues(addressInDb, address);
-
+        System.out.println(addressInDb);
         Object[] params = new Object[]{
                 addressInDb.getStreet(),
+                addressInDb.getCity(),
                 addressInDb.getProvince(),
                 addressInDb.getPostcode(),
                 addressInDb.getCountry(),
@@ -61,7 +62,7 @@ public class AddressService {
             return Status.NOT_FOUND;
         }
 
-        boolean addressAlreadyExist = db.findOneInTable("addresses", new Object[]{userId});
+        boolean addressAlreadyExist = db.findOneInTable("addresses", "user_id", new Object[]{userId});
 
         if (addressAlreadyExist) {
             return Status.USER_EXIST;

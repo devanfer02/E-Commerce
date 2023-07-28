@@ -3,7 +3,7 @@ import random
 total_sellers = 17
 products_per_seller = 2
 
-with open("../db/products/products_mock_data.sqlite", "w") as file :
+with open("../db/products/mock_data_products.sqlite", "w") as file :
     file.truncate(0);
     for seller_id in range(1, total_sellers + 1):
         for product_num in range(1, products_per_seller + 1):

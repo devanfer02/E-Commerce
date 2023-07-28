@@ -30,6 +30,7 @@ public class AddressController {
     @PostMapping("/{userId}")
     public ResponseEntity<Object> postAddress(@RequestBody Address address, @PathVariable Integer userId) {
         try {
+            
             Status request = addressService.verify(address, userId);
 
             if (request == Status.NOT_FOUND) {
@@ -53,6 +54,7 @@ public class AddressController {
             return Response.generateResponse(HttpStatus.CREATED, "successfully add data", address);
 
         } catch (Exception exception) {
+            System.out.println(exception.getMessage());
             return Response.generateResponse(HttpStatus.INTERNAL_SERVER_ERROR, "internal server error", null);
         }
     }
@@ -60,6 +62,7 @@ public class AddressController {
     @PatchMapping("/{userId}")
     public ResponseEntity<Object> patchAddress(@PathVariable Integer userId, @RequestBody Address address) {
         try {
+            System.out.println("kepanggil");
             int rowsAffected = addressService.updateAddress(userId, address);
 
             if (rowsAffected < 1) {
@@ -82,7 +85,7 @@ public class AddressController {
                 return Response.generateResponse(HttpStatus.BAD_REQUEST, "failed to delete data", null);
             }
 
-            return Response.generateResponse(HttpStatus.OK, "successfully update data", null);
+            return Response.generateResponse(HttpStatus.OK, "successfully delete data", null);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return Response.generateResponse(HttpStatus.INTERNAL_SERVER_ERROR, "internal server error", null);
