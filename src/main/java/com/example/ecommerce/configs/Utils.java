@@ -1,6 +1,9 @@
 package com.example.ecommerce.configs;
 
 import java.lang.reflect.Method;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 public final class Utils {
     private Utils(){}
@@ -52,5 +55,14 @@ public final class Utils {
         }
 
         return true;
+    }
+
+    public static String createTimeAt() {
+        ZoneId zoneId = ZoneId.of("Asia/Jakarta");
+        ZonedDateTime currentDateTime = ZonedDateTime.now(zoneId);
+        String pattern = "dd-MM-yyyy HH:mm:ss";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+
+        return currentDateTime.format(formatter);
     }
 }

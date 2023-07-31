@@ -106,7 +106,7 @@ public class ProductService {
 
         boolean stillNull = Utils.nullChecker(product);
 
-        if(stillNull) {
+        if (stillNull) {
             return Status.VALUES_STILL_NULL;
         }
 

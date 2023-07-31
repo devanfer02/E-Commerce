@@ -4,6 +4,7 @@ CREATE TABLE orders (
     notes TEXT NOT NULL,
     total INTEGER NOT NULL,
     discount INTEGER NOT NULL,
+    ordered_at TEXT NOT NULL,
     is_paid BOOLEAN NOT NULL
 );
 

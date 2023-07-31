@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path="/api/products")
@@ -23,7 +24,8 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<Object> getProducts
             (@RequestParam(value = "min", required = false) Long min,
-             @RequestParam(value = "max", required = false) Long max) {
+             @RequestParam(value = "max", required = false) Long max,
+             @RequestParam(value = "sellerId", required = false) Integer sellerId) {
         try {
             List<Product> data = null;
 
@@ -35,6 +37,10 @@ public class ProductController {
                 data = productService.getProducts(max, "max");
             } else {
                 data = productService.getProducts();
+            }
+
+            if (sellerId != null) {
+                data = data.stream().filter(product -> product.getSeller() == (sellerId)).collect(Collectors.toList());
             }
 
             return Response.generateResponse(HttpStatus.OK, "successfully fetch data", data);

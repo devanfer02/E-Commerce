@@ -62,7 +62,6 @@ public class AddressController {
     @PatchMapping("/{userId}")
     public ResponseEntity<Object> patchAddress(@PathVariable Integer userId, @RequestBody Address address) {
         try {
-            System.out.println("kepanggil");
             int rowsAffected = addressService.updateAddress(userId, address);
 
             if (rowsAffected < 1) {
