@@ -79,7 +79,14 @@ public class OrderService {
             return Status.VALUES_STILL_NULL;
         }
 
+        stillNull = order.getDetails().getProduct() == null || order.getDetails().getQuantity() == null || order.getDetails().getPrice() == null;
+
+        if (stillNull) {
+            return Status.VALUES_STILL_NULL;
+        }
+
         order.setId(db.getMaxIdFromTable("orders"));
+        order.getDetails().setOrder(order.getId());
         return Status.OK;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.ecommerce.order_detail;
+package com.example.ecommerce.order.order_detail;
 
 public class OrderDetail {
     private Integer order;
@@ -7,6 +7,12 @@ public class OrderDetail {
     private Double price;
 
     public OrderDetail() {}
+
+    public OrderDetail(Integer product, Integer quantity, Double price) {
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+    }
     
     public OrderDetail(Integer order, Integer product, Integer quantity, Double price) {
         this.order = order;

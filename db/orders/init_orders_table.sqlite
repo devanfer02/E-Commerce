@@ -5,7 +5,7 @@ CREATE TABLE orders (
     total INTEGER NOT NULL,
     discount INTEGER NOT NULL,
     ordered_at TEXT NOT NULL,
-    is_paid BOOLEAN NOT NULL
+    is_paid BOOLEAN NOT NULL,
 );
 
 CREATE INDEX order_id_idx ON orders (id);

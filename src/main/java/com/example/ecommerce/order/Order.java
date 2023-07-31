@@ -1,5 +1,7 @@
 package com.example.ecommerce.order;
 
+import com.example.ecommerce.order.order_detail.OrderDetail;
+
 public class Order {
     private Integer id;
     private Integer buyer;
@@ -9,7 +11,21 @@ public class Order {
     private String orderedAt;
     private boolean isPaid;
 
+    private OrderDetail details;
+
     public Order() {}
+
+    public Order(Integer id, Integer buyer, Integer total, Double discount, String notes,
+                 String orderedAt, boolean isPaid, OrderDetail details) {
+        this.id = id;
+        this.buyer = buyer;
+        this.total = total;
+        this.discount = discount;
+        this.notes = notes;
+        this.orderedAt = orderedAt;
+        this.isPaid = isPaid;
+        this.details = details;
+    }
 
     public Order(Integer id, Integer buyer, Integer total, Double discount, String notes, String orderedAt, boolean isPaid) {
         this.id = id;
@@ -84,6 +100,14 @@ public class Order {
 
     public void setPaid(boolean paid) {
         isPaid = paid;
+    }
+
+    public OrderDetail getDetails() {
+        return details;
+    }
+
+    public void setDetails(OrderDetail details) {
+        this.details = details;
     }
 
     @Override

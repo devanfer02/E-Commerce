@@ -2,6 +2,7 @@ package com.example.ecommerce.order;
 
 import java.util.List;
 
+import com.example.ecommerce.order.order_detail.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -15,9 +16,13 @@ import com.example.ecommerce.configs.Status;
 @RequestMapping(path="/api/orders")
 public class OrderController {
     private final OrderService orderService;
+    private final OrderDetailService orderDetailService;
 
     @Autowired
-    public OrderController(OrderService orderService) { this.orderService = orderService; }
+    public OrderController(OrderService orderService, OrderDetailService orderDetailService) {
+        this.orderService        = orderService;
+        this.orderDetailService = orderDetailService;
+    }
 
     @GetMapping
     public ResponseEntity<Object> getOrders(@RequestParam(value="userId", required=true) Integer userId) {
@@ -49,6 +54,10 @@ public class OrderController {
     @PostMapping("/{userId}")
     public ResponseEntity<Object> postOrder(@PathVariable Integer userId, @RequestBody Order order) {
         try {
+            // TODO : update post mapping supaya relate dgn order detail (request body)
+            // TODO : update order docs
+            // BY ACCEPTING PRODUCT ID IN REQUEST BODY
+
             Status request = orderService.verify(order, userId);
             
             if (request == Status.NOT_FOUND) {
@@ -59,9 +68,10 @@ public class OrderController {
                 return Response.generateResponse(HttpStatus.BAD_REQUEST, "request values still null", null);
             }
 
-            int rowsAffected = orderService.addNewOrder(order);
+            int rowsAffectedOrder  = orderService.addNewOrder(order);
+            int rowsAffectedDetail = orderDetailService.addNewDetails(order.getDetails());
 
-            if (rowsAffected == 0) {
+            if (rowsAffectedOrder == 0 || rowsAffectedDetail == 0) {
                 return Response.generateResponse(HttpStatus.BAD_REQUEST, "failed to add data", null);
             }
 

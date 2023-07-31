@@ -1,4 +1,4 @@
-package com.example.ecommerce.order_detail;
+package com.example.ecommerce.order.order_detail;
 
 import org.springframework.jdbc.core.RowMapper;
 

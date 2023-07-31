@@ -1,6 +1,10 @@
-CREATE TABLE "order_details (
+CREATE TABLE "order_details" (
     order_id INTEGER NOT NULL,
     product_id INTEGER NOT NULL,
     quantity INTEGER NOT NULL,
-    price INTEGER NOT NULL
+    price INTEGER NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES Orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE CASCADE
 );
+
+CREATE INDEX details_id_idx ON order_details (id);
