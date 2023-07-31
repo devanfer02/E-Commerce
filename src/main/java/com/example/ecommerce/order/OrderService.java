@@ -29,11 +29,7 @@ public class OrderService {
     }
 
     public int addNewOrder(Order order) {
-        String query = "INSERT INTO orders (buyer_id, notes, total, discount, is_paid) VALUES (?, ?, ?, ? ,?)";
-
-        String currentTime = Utils.createTimeAt();
-
-        order.setOrderedAt(currentTime);
+        String query = "INSERT INTO orders (buyer_id, notes, total, discount, ordered_at, is_paid) VALUES (?, ?, ?, ?, ?, ?)";
         Object[] params = new Object[]{
                 order.getBuyer(),
                 order.getNotes(),
@@ -47,7 +43,7 @@ public class OrderService {
     }
 
     public int updateOrder(Integer id, Order order) {
-        String query = "UPDATE orders SET buyer_id=?, notes=?, total=?, discount=?, is_paid=?";
+        String query = "UPDATE orders SET buyer_id=?, notes=?, total=?, discount=?, is_paid=? WHERE id=?";
         Order orderInDb = db.fetchByIdInTable("orders", id, new OrderRowMapper());
 
         Utils.updateObjectValues(orderInDb, order);
@@ -56,7 +52,8 @@ public class OrderService {
                 orderInDb.getNotes(),
                 orderInDb.getTotal(),
                 orderInDb.getDiscount(),
-                orderInDb.isPaid()
+                orderInDb.isPaid(),
+                id
         };
 
         return db.insert(query, params);
@@ -71,7 +68,10 @@ public class OrderService {
             return Status.NOT_FOUND;
         }
 
+        String currentTime = Utils.createTimeAt();
+
         order.setBuyer(userId);
+        order.setOrderedAt(currentTime);
 
         boolean stillNull = Utils.nullChecker(order);
 

@@ -12,7 +12,7 @@ import com.example.ecommerce.configs.Response;
 import com.example.ecommerce.configs.Status;
 
 @RestController
-@RequestMapping(path="/api/order")
+@RequestMapping(path="/api/orders")
 public class OrderController {
     private final OrderService orderService;
 

@@ -2,7 +2,9 @@ package com.example.ecommerce.order_detail;
 
 import com.example.ecommerce.configs.Database;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class OrderDetailService {
     private Database db;
 

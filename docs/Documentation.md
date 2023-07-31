@@ -536,9 +536,113 @@
 ### Orders
 
 1. ##### Get Order By User Id
+   endpoint : ```api/orders?userId={}``` ```GET METHOD```    
+   json response : 
+   ```
+   {
+    "data": [
+        {
+            "id": 19,
+            "buyer": 18,
+            "total": 440147,
+            "discount": 49.0,
+            "notes": "notes 13",
+            "orderedAt": "2023-02-20 14:49:27",
+            "paid": true
+        },
+        {
+            "id": 23,
+            "buyer": 18,
+            "total": 246212,
+            "discount": 38.0,
+            "notes": "notes 163",
+            "orderedAt": "2023-01-03 02:42:56",
+            "paid": true
+        }
+    ],
+    "message": "successfully fetch data",
+    "status": 200
+   }
+   ```
 2. ##### Get Order By Id
+   endpoint : ```api/orders/{id}``` ```GET METHOD```    
+   json response : 
+   ```
+   {
+    "data": {
+        "id": 1,
+        "buyer": 33,
+        "total": 269960,
+        "discount": 24.0,
+        "notes": "notes 16",
+        "orderedAt": "2023-11-02 17:34:44",
+        "paid": true
+    },
+    "message": "successfully fetch data",
+    "status": 200
+   } 
+   ```
+   json response if not found : 
+   ```
+   {
+    "data": null,
+    "message": "data not found",
+    "status": 404
+   }
+   ```
 3. ##### Add Order By User Id
+   endpoint : ```api/orders/{userId}``` ```POST METHOD```        
+   json request body : 
+   ```
+   {
+    "total": 42069,
+    "discount": 0.0,
+    "notes": "notes 181",
+    "paid": true
+   }
+   ```
+   json response : 
+   ```
+   {
+    "data": {
+        "id": 181,
+        "buyer": 1,
+        "total": 42069,
+        "discount": 0.0,
+        "notes": "notes 181",
+        "orderedAt": "2023-07-31 22:42:08",
+        "paid": true
+    },
+    "message": "successfully add data",
+    "status": 201
+   }
+   ```
 4. ##### Update Order
+   endpoint : ```api/orders/{id}``` ```PATCH METHOD```     
+   json request body : 
+   ```
+   {
+    "total": 42069,
+    "discount": 0.0,
+    "notes": "notes 181",
+    "paid": false
+   }
+   ```
+   json response : 
+   ```
+   {
+    "data": null,
+    "message": "successfully update data",
+    "status": 200
+   }
+   ```
 5. ##### Delete Order
-
-### Order Details
+   endpoint : ```api/orders/{id}``` ```DELETE METHOD```   
+   json response : 
+   ```
+   {
+    "data": null,
+    "message": "successfully delete data",
+    "status": 200
+   }
+   ```

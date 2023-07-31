@@ -33,7 +33,10 @@ public final class Utils {
 
     public static boolean updateObjectValues(Object oldParam, Object newParam) {
         for (Method method : newParam.getClass().getMethods()) {
-            if(!method.getName().startsWith("get")) {
+            boolean isGet  = method.getName().startsWith("get");
+            boolean isBool = method.getName().startsWith("is");
+
+            if (!isGet && !isBool) {
                 continue;
             }
 
@@ -44,7 +47,15 @@ public final class Utils {
                     continue;
                 }
 
-                String setterName = "s" + method.getName().substring(1);
+                // only accept isGet and isBool for now
+                String setterName = "";
+                if (isGet) {
+                    setterName = "s" + method.getName().substring(1);
+                } else {
+                    setterName = "set" + method.getName().substring(2);
+                }
+
+
                 Method setter = oldParam.getClass().getMethod(setterName, method.getReturnType());
                 setter.invoke(oldParam, object);
 
@@ -60,7 +71,7 @@ public final class Utils {
     public static String createTimeAt() {
         ZoneId zoneId = ZoneId.of("Asia/Jakarta");
         ZonedDateTime currentDateTime = ZonedDateTime.now(zoneId);
-        String pattern = "dd-MM-yyyy HH:mm:ss";
+        String pattern = "yyyy-MM-dd HH:mm:ss";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
 
         return currentDateTime.format(formatter);
