@@ -535,8 +535,8 @@
 
 ### Orders
 
-1. ##### Get Order By User Id
-   endpoint : ```api/orders?userId={}``` ```GET METHOD```    
+1. ##### Get Order By User Id  ```GET METHOD```    
+   endpoint : ```api/orders?userId={}```    
    json response : 
    ```
    {
@@ -564,8 +564,8 @@
     "status": 200
    }
    ```
-2. ##### Get Order By Id
-   endpoint : ```api/orders/{id}``` ```GET METHOD```    
+2. ##### Get Order By Id ```GET METHOD```    
+   endpoint : ```api/orders/{id}```     
    json response : 
    ```
    {
@@ -591,8 +591,8 @@
    }
    ```
    
-3. ##### Get Order By Id With Detail
-   endpoint : ```api/orders/{id}?detail={boolean}``` ```GET METHOD```    
+3. ##### Get Order By Id With Detail ```GET METHOD```    
+   endpoint : ```api/orders/{id}?detail={boolean}```    
    json response :
    ```
    {
@@ -615,8 +615,8 @@
     "status": 200
    }
    ```
-4. ##### Add Order By User Id
-   endpoint : ```api/orders/{userId}``` ```POST METHOD```        
+4. ##### Add Order By User Id ```POST METHOD```        
+   endpoint : ```api/orders/{userId}```     
    json request body : 
    ```
    {
@@ -653,8 +653,8 @@
     "status": 201
    }
    ```
-5. ##### Update Order
-   endpoint : ```api/orders/{id}``` ```PATCH METHOD```     
+5. ##### Update Order ```PATCH METHOD```     
+   endpoint : ```api/orders/{id}```    
    json request body : 
    ```
    {
@@ -672,8 +672,8 @@
     "status": 200
    }
    ```
-6. ##### Delete Order
-   endpoint : ```api/orders/{id}``` ```DELETE METHOD```   
+6. ##### Delete Order ```DELETE METHOD```   
+   endpoint : ```api/orders/{id}```    
    json response : 
    ```
    {

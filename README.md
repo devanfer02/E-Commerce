@@ -1,9 +1,9 @@
 ## E Commerce API 
 
 ### How to Play
-1. Configure application.properties
-2. Make sure dependancies already installed
-3. Run the main methdo
+1. Configure .env file
+2. Make sure dependencies already installed
+3. Run the main method
 
 ### Documentation
 Refer to [this](./docs/Documentation.md) documentation about this api.   
