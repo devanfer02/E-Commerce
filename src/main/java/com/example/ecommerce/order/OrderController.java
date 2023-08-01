@@ -30,6 +30,7 @@ public class OrderController {
             if (userId == null) {
                 return Response.generateResponse(HttpStatus.BAD_REQUEST, "user id not provided in query", null);
             }
+
             List<Order> orders = orderService.getOrders(userId);
 
             return Response.generateResponse(HttpStatus.OK, "successfully fetch data", orders);
@@ -40,9 +41,14 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOrderById(@PathVariable Integer id) {
+    public ResponseEntity<Object> getOrderById(@PathVariable Integer id,
+                                               @RequestParam(value="detail", required=false) Boolean detail) {
         try {
             Order order = orderService.getOrderById(id);
+
+            if (detail != null && detail) {
+                order.setDetails(orderDetailService.getDetailsByOrderId(id));
+            }
 
             return Response.generateResponse(HttpStatus.OK, "successfully fetch data", order);
         } catch (EmptyResultDataAccessException exception) {
@@ -54,9 +60,6 @@ public class OrderController {
     @PostMapping("/{userId}")
     public ResponseEntity<Object> postOrder(@PathVariable Integer userId, @RequestBody Order order) {
         try {
-            // TODO : update post mapping supaya relate dgn order detail (request body)
-            // TODO : update order docs
-            // BY ACCEPTING PRODUCT ID IN REQUEST BODY
 
             Status request = orderService.verify(order, userId);
             

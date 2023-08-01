@@ -590,7 +590,32 @@
     "status": 404
    }
    ```
-3. ##### Add Order By User Id
+   
+3. ##### Get Order By Id With Detail
+   endpoint : ```api/orders/{id}?detail={boolean}``` ```GET METHOD```    
+   json response :
+   ```
+   {
+    "data": {
+        "id": 186,
+        "buyer": 1,
+        "total": 42069,
+        "discount": 0.0,
+        "notes": "notes 181",
+        "orderedAt": "2023-08-01 13:19:37",
+        "details": {
+            "order": 186,
+            "product": 1,
+            "quantity": 10,
+            "price": 10000.0
+        },
+        "paid": true
+    },
+    "message": "successfully fetch data",
+    "status": 200
+   }
+   ```
+4. ##### Add Order By User Id
    endpoint : ```api/orders/{userId}``` ```POST METHOD```        
    json request body : 
    ```
@@ -598,26 +623,37 @@
     "total": 42069,
     "discount": 0.0,
     "notes": "notes 181",
-    "paid": true
+    "paid": true,
+    "details": {
+        "product": 1,
+        "quantity": 10,
+        "price": 10000
+    }
    }
    ```
    json response : 
    ```
    {
     "data": {
-        "id": 181,
+        "id": 186,
         "buyer": 1,
         "total": 42069,
         "discount": 0.0,
         "notes": "notes 181",
-        "orderedAt": "2023-07-31 22:42:08",
+        "orderedAt": "2023-08-01 13:19:37",
+        "details": {
+            "order": 186,
+            "product": 1,
+            "quantity": 10,
+            "price": 10000.0
+        },
         "paid": true
     },
     "message": "successfully add data",
     "status": 201
    }
    ```
-4. ##### Update Order
+5. ##### Update Order
    endpoint : ```api/orders/{id}``` ```PATCH METHOD```     
    json request body : 
    ```
@@ -636,13 +672,29 @@
     "status": 200
    }
    ```
-5. ##### Delete Order
+6. ##### Delete Order
    endpoint : ```api/orders/{id}``` ```DELETE METHOD```   
    json response : 
    ```
    {
     "data": null,
     "message": "successfully delete data",
+    "status": 200
+   }
+   ```
+   
+7. ##### Get Only Details Of Order By Order Id ```GET METHOD```
+   endpoint : ```api/orders/details/{orderId}```    
+   json response : 
+   ```
+   {
+    "data": {
+        "order": 186,
+        "product": 1,
+        "quantity": 10,
+        "price": 10000.0
+    },
+    "message": "successfully fetch data",
     "status": 200
    }
    ```

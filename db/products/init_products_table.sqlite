@@ -1,6 +1,4 @@
-PRAGMA foreign_keys = ON;
-
-CREATE TABLE products (
+CREATE TABLE IF NOT EXISTS "products" (
     id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
     seller_id INTEGER,
     title TEXT,
